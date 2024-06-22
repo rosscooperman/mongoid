@@ -25,6 +25,7 @@ module Mongoid
             :counter_cache,
             :dependent,
             :foreign_key,
+            :foreign_type,
             :index,
             :polymorphic,
             :primary_key,
@@ -107,7 +108,7 @@ module Mongoid
         #
         # @return [ String ] The field used to store the type of polymorphic association.
         def inverse_type
-          (@inverse_type ||= "#{name}_type") if polymorphic?
+          (@inverse_type ||= @options[:foreign_type].to_s || "#{name}_type") if polymorphic?
         end
 
         # The nested builder object.
